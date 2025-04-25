@@ -74,7 +74,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   /* Use serif for headings */
   font-weight: var(--font-weight-7);
   line-height: var(--font-lineheight-1);
