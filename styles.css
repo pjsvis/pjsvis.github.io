@@ -1,0 +1,249 @@
+
+/* style.css */
+/* Make sure Open Props is imported/linked BEFORE this file */
+
+/* ----------------------------------------- */
+/* 1. Base & Root Configuration              */
+/* ----------------------------------------- */
+
+:root {
+  /* Optional: Override specific Open Props defaults if needed */
+  /* Example: Change the default link color */
+  /* --link: var(--orange-6); */
+  /* --link-visited: var(--orange-8); */
+
+  /* Define custom properties using Open Props */
+  --surface-1: var(--gray-0); /* Light theme surface */
+  --text-1: var(--gray-9);    /* Light theme text */
+  --brand-color: var(--indigo-6);
+  --brand-text: var(--gray-0);
+
+  @media (prefers-color-scheme: dark) {
+    /* Define dark theme colors */
+    --surface-1: var(--gray-10);
+    --text-1: var(--gray-1);
+    --brand-color: var(--indigo-4);
+    --brand-text: var(--gray-9);
+
+    /* Open Props link colors often adapt automatically, but you can force them */
+    /* --link: var(--indigo-3); */
+    /* --link-visited: var(--indigo-5); */
+  }
+}
+
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  /* Set a base fluid font size for responsive typography */
+  font-size: var(--font-size-fluid-0);
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0; /* Remove default body margin */
+  padding: var(--size-fluid-3); /* Add some padding around the content */
+  font-family: var(--font-sans);
+  color: var(--text-1);
+  background-color: var(--surface-1);
+  line-height: var(--font-lineheight-3); /* Set a comfortable line height */
+  -webkit-font-smoothing: antialiased; /* Improve font rendering */
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ----------------------------------------- */
+/* 2. Typography                           */
+/* ----------------------------------------- */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif); /* Use serif for headings */
+  font-weight: var(--font-weight-7);
+  line-height: var(--font-lineheight-1);
+  color: var(--brand-color); /* Use the brand color for headings */
+  margin-block-start: var(--size-fluid-3); /* Space above headings */
+  margin-block-end: var(--size-fluid-1);   /* Space below headings */
+  letter-spacing: var(--font-letterspacing-0); /* Slightly tighter spacing */
+  max-width: var(--size-header-2); /* Constrain heading width */
+}
+
+/* Use fluid font sizes for main headings */
+h1 { font-size: var(--font-size-fluid-3); }
+h2 { font-size: var(--font-size-fluid-2); }
+h3 { font-size: var(--font-size-fluid-1); }
+/* Use fixed sizes for smaller headings */
+h4 { font-size: var(--font-size-3); }
+h5 { font-size: var(--font-size-2); }
+h6 { font-size: var(--font-size-1); }
+
+p {
+  max-width: var(--size-content-3); /* Readable line length for paragraphs */
+  margin-block-start: 0;
+  margin-block-end: var(--size-fluid-1); /* Consistent paragraph spacing */
+}
+
+a {
+  color: var(--link); /* Use Open Props link color */
+  text-decoration: underline;
+  text-decoration-thickness: var(--border-size-1);
+  text-underline-offset: var(--size-1);
+  transition: color .2s var(--ease-squish-2); /* Add transition */
+}
+
+a:hover,
+a:focus-visible { /* Use focus-visible for keyboard navigation */
+  color: var(--link-visited); /* Use Open Props visited link color on hover/focus */
+  outline: var(--border-size-2) solid var(--link); /* Basic focus outline */
+  outline-offset: var(--size-1);
+  border-radius: var(--radius-1); /* Slight rounding on focus */
+}
+
+/* Remove default focus outline if using a custom one */
+a:focus {
+  outline: none;
+}
+
+
+/* ----------------------------------------- */
+/* 3. Layout Elements                        */
+/* ----------------------------------------- */
+
+.container {
+  width: min(100% - (var(--size-5) * 2), var(--size-content-3)); /* Responsive container */
+  margin-inline: auto; /* Center the container */
+  padding-inline: var(--size-5); /* Add horizontal padding inside container */
+}
+
+hr {
+  border: none;
+  border-block-start: var(--border-size-1) solid var(--gray-3);
+  margin-block: var(--size-fluid-3); /* Space around horizontal rules */
+
+  @media (prefers-color-scheme: dark) {
+    border-block-start-color: var(--gray-7);
+  }
+}
+
+/* ----------------------------------------- */
+/* 4. Components                             */
+/* ----------------------------------------- */
+
+/* Example Button Styling (if not using Open Props buttons.min.css) */
+.button {
+  display: inline-flex; /* Use flex for alignment */
+  align-items: center;
+  justify-content: center;
+  gap: var(--size-2); /* Space between icon/text */
+  padding: var(--size-2) var(--size-4);
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-6);
+  font-size: var(--font-size-1);
+  color: var(--brand-text);
+  background-color: var(--brand-color);
+  border: var(--border-size-2) solid transparent; /* Transparent border for layout consistency */
+  border-radius: var(--radius-2);
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-2);
+  transition:
+    background-color .2s var(--ease-in-out-1),
+    transform .1s var(--ease-out-1),
+    box-shadow .2s var(--ease-in-out-1);
+}
+
+.button:hover {
+  /* Find a slightly darker/lighter shade based on theme */
+  background-color: var(--indigo-7); /* Adjust for light theme hover */
+  box-shadow: var(--shadow-3);
+  transform: translateY(calc(var(--size-1) * -0.25)); /* Slight lift */
+
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--indigo-3); /* Adjust for dark theme hover */
+  }
+}
+
+.button:active {
+  transform: translateY(0);
+  box-shadow: var(--inner-shadow-1);
+  /* Find an even darker/lighter shade based on theme */
+  background-color: var(--indigo-8); /* Adjust for light theme active */
+
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--indigo-2); /* Adjust for dark theme active */
+  }
+}
+
+.button:focus-visible {
+  outline: var(--border-size-2) solid var(--brand-color);
+  outline-offset: var(--size-1);
+  border-color: var(--surface-1); /* Make border visible against outline */
+
+  @media (prefers-color-scheme: dark) {
+      border-color: var(--surface-1); /* Same logic for dark */
+  }
+}
+
+/* Remove default focus outline if using focus-visible */
+.button:focus {
+  outline: none;
+}
+
+
+/* Example Card */
+.card {
+  background: var(--surface-1);
+  border: var(--border-size-1) solid var(--gray-2);
+  border-radius: var(--radius-3);
+  padding: var(--size-fluid-2);
+  box-shadow: var(--shadow-3);
+  transition: box-shadow .2s var(--ease-3);
+
+  &:hover {
+    box-shadow: var(--shadow-4);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    border-color: var(--gray-8);
+    background: var(--gray-9); /* Slightly different surface for cards in dark */
+  }
+}
+
+/* ----------------------------------------- */
+/* 5. Utility Classes (Optional)             */
+/* ----------------------------------------- */
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.text-center { text-align: center; }
+.text-lg { font-size: var(--font-size-3); }
+
+/* Example gradient text using Open Props Gradients */
+.gradient-text {
+  background: var(--gradient-15); /* Choose any gradient */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+
+/* ----------------------------------------- */
+/* 6. Animations (Example)                   */
+/* ----------------------------------------- */
+
+.fade-in {
+  animation: var(--animation-fade-in) forwards;
+  opacity: 0; /* Start hidden */
+}
+
+.pulsing-element {
+    animation: var(--animation-pulse);
+}
